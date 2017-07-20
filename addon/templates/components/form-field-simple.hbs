@@ -1,0 +1,19 @@
+{{yield (hash
+  object=object
+  propertyName=propertyName
+  labelText=labelText
+  label=(component 'form-label' labelText
+    for=fieldId
+    classNames=labelClasses
+    required=required
+    form=form)
+  control=(component control value
+    id=fieldId
+    name=fieldName
+    classNames=inputClasses
+    required=required
+    aria-invalid='false'
+    aria-describedby=describedByValue
+    form=form
+    update=(action 'processUpdate' object propertyName))
+)}}

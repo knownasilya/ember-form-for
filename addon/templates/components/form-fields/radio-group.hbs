@@ -14,7 +14,7 @@
 
   <ul>
     {{#each options as |option|}}
-      {{#with (component 'form-fields/radio-field' propertyName option.value
+      {{#with (component 'form-fields/radio-field-simple' propertyName option.value
         label=option.label
         disabled=disabled
         tagName="li"
