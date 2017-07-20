@@ -1,0 +1,29 @@
+{{#form-field-simple propertyName
+    class="radio-field"
+    classNames=fieldClasses
+    inputClasses=inputClasses
+    labelClasses=labelClasses
+    object=object
+    form=form
+    label=labelText
+    control=control
+    update=(action update) as |f|}}
+  {{#f.label required=required}}
+    {{f.control
+        option=value
+        accesskey=accesskey
+        autocomplete=autocomplete
+        autofocus=autofocus
+        autosave=autosave
+        dir=dir
+        disabled=disabled
+        hidden=hidden
+        lang=lang
+        list=list
+        required=required
+        tabindex=tabindex
+        title=title
+    }}
+    {{f.labelText}}
+  {{/f.label}}
+{{/form-field-simple}}
