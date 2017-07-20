@@ -119,17 +119,6 @@ const FormFieldComponent = Component.extend({
     return `${this._nameForObject()}[${get(this, 'propertyName')}]`;
   }),
 
-  describedByValue: computed('fieldId', function() {
-    let ids = [];
-    let fieldId = get(this, 'fieldId');
-
-    if (isPresent(hint)) {
-      ids.push(`${fieldId}_hint`);
-    }
-
-    return isEmpty(ids) ? null : ids.join(' ');
-  }),
-
   _nameForObject() {
     return get(this, 'modelName') || guidFor(get(this, 'object'));
   },
