@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../templates/components/form-field';
+import layout from '../templates/components/form-field-simple';
 
 import { humanize } from '../utils/strings';
 

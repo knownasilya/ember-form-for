@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import layout from '../../templates/components/form-fields/radio-field';
+import layout from '../../templates/components/form-fields/radio-field-simple';
 
 import { humanize } from '../../utils/strings';
 
