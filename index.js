@@ -2,7 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-form-for',
+  name: require('./package').name,
+  
   included: function(app) {
     this._super.included(app);
   }

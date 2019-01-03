@@ -18,7 +18,8 @@ compatible with apps built with Ember.js version __2.3__ and up.
 
 __NOTE__: I'm working on rewriting docs, [click here](https://github.com/martndemus/ember-form-for/tree/1.4.1) for the old docs!
 
-## Installation
+Installation
+------------------------------------------------------------------------------
 
 ```
 ember install ember-form-for
