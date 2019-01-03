@@ -1,5 +1,4 @@
-import Ember from 'ember';
-const { getOwner } = Ember;
+import { getOwner } from '@ember/application';
 
 export function initialize(app) {
   // HACK: This can be undefined in the FastBoot environment.

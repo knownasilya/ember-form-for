@@ -1,69 +1,76 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find, findAll, triggerEvent } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 import { initialize as formForInitializer } from 'dummy/instance-initializers/form-for-initializer';
 import config from 'dummy/config/environment';
 
-moduleForComponent('form-controls/button', 'Integration | Component | {{form-controls/button}}', {
-  integration: true,
+module('Integration | Component | {{form-controls/button}}', function(hooks) {
+  setupRenderingTest(hooks);
 
-  teardown() {
-    delete config['ember-form-for'];
-  }
-});
+  hooks.beforeEach(function() {
+    this.teardown = function() {
+      delete config['ember-form-for'];
+    };
 
-test('It renders a button', function(assert) {
-  this.render(hbs`{{form-controls/button}}`);
-  assert.equal(this.$('button').length, 1, 'Button is rendered');
-});
+    this.actions = {};
+    this.send = (actionName, ...args) => this.actions[actionName].apply(this, args);
+  });
 
-test('The type of the button is "button"', function(assert) {
-  this.render(hbs`{{form-controls/button}}`);
-  assert.equal(this.$('button').attr('type'), 'button', 'Type is button');
-});
+  test('It renders a button', async function(assert) {
+    await render(hbs`{{form-controls/button}}`);
+    assert.dom('button').exists({ count: 1 }, 'Button is rendered');
+  });
 
-test('It can be passed a label value', function(assert) {
-  this.render(hbs`{{form-controls/button label="TEST"}}`);
-  assert.equal(this.$('button').text().trim(), 'TEST', 'The text on the button is TEST');
-});
+  test('The type of the button is "button"', async function(assert) {
+    await render(hbs`{{form-controls/button}}`);
+    assert.dom('button').hasAttribute('type', 'button', 'Type is button');
+  });
 
-test('The label can also be a block', function(assert) {
-  this.render(hbs`{{#form-controls/button}}TEST{{/form-controls/button}}`);
-  assert.equal(this.$('button').text().trim(), 'TEST', 'The text on the button is TEST');
-});
+  test('It can be passed a label value', async function(assert) {
+    await render(hbs`{{form-controls/button label="TEST"}}`);
+    assert.dom('button').hasText('TEST', 'The text on the button is TEST');
+  });
 
-test('It can have a label value specified as a positional param', function(assert) {
-  this.render(hbs`{{form-controls/button "Click Me"}}`);
-  assert.equal(this.$('button').text().trim(), 'Click Me', 'Button has "Click Me" as label');
-});
+  test('The label can also be a block', async function(assert) {
+    await render(hbs`{{#form-controls/button}}TEST{{/form-controls/button}}`);
+    assert.dom('button').hasText('TEST', 'The text on the button is TEST');
+  });
 
-test('Clicking the button triggers the click action', function(assert) {
-  assert.expect(1);
-  this.on('click', () => assert.ok(true));
-  this.render(hbs`{{form-controls/button click=(action 'click')}}`);
-  this.$('button').trigger('click');
-});
+  test('It can have a label value specified as a positional param', async function(assert) {
+    await render(hbs`{{form-controls/button "Click Me"}}`);
+    assert.dom('button').hasText('Click Me', 'Button has "Click Me" as label');
+  });
 
-test('I can set and configure custom buttonClasses', function(assert) {
-  config['ember-form-for'] = {
-    buttonClasses: ['custom-class-1']
-  };
+  test('Clicking the button triggers the click action', async function(assert) {
+    assert.expect(1);
+    this.actions.click = () => assert.ok(true);
+    await render(hbs`{{form-controls/button click=(action 'click')}}`);
+    await click('button');
+  });
 
-  formForInitializer(this.container);
+  test('I can set and configure custom buttonClasses', async function(assert) {
+    config['ember-form-for'] = {
+      buttonClasses: ['custom-class-1']
+    };
 
-  this.set('buttonClasses', ['custom-class-2']);
-  this.render(hbs`{{form-controls/button class=buttonClasses}}`);
+    formForInitializer(this.container);
 
-  assert.equal(this.$('.custom-class-1').length, 1);
-  assert.equal(this.$('.custom-class-2').length, 1);
-});
+    this.set('buttonClasses', ['custom-class-2']);
+    await render(hbs`{{form-controls/button class=buttonClasses}}`);
 
-test('I can set the disabled attribute', function(assert) {
-  this.render(hbs`{{form-controls/button disabled=true}}`);
-  assert.equal(this.$('button').attr('disabled'), 'disabled', 'disabled is set to true');
-});
+    assert.dom('.custom-class-1').exists({ count: 1 });
+    assert.dom('.custom-class-2').exists({ count: 1 });
+  });
 
-test('I can set the aria-controls attribute', function(assert) {
-  this.render(hbs`{{form-controls/button aria-controls="foo"}}`);
-  assert.equal(this.$('button').attr('aria-controls'), 'foo', 'aria-controls is set to foo');
+  test('I can set the disabled attribute', async function(assert) {
+    await render(hbs`{{form-controls/button disabled=true}}`);
+    assert.dom('button').hasAttribute('disabled', 'disabled', 'disabled is set to true');
+  });
+
+  test('I can set the aria-controls attribute', async function(assert) {
+    await render(hbs`{{form-controls/button aria-controls="foo"}}`);
+    assert.dom('button').hasAttribute('aria-controls', 'foo', 'aria-controls is set to foo');
+  });
 });

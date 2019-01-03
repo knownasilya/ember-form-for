@@ -1,13 +1,8 @@
-import Ember from 'ember';
-
-const {
-  Controller,
-  Object: EmberObject,
-  set,
-  run,
-  RSVP,
-  isEmpty
-} = Ember;
+import Controller from '@ember/controller';
+import EmberObject, { set } from '@ember/object';
+import { run } from '@ember/runloop';
+import RSVP from 'rsvp';
+import { isEmpty } from '@ember/utils';
 
 function createEmptyObject(attrs) {
   return EmberObject.create(attrs, {

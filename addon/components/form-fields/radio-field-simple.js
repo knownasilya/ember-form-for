@@ -1,18 +1,12 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { dasherize } from '@ember/string';
+import { or } from '@ember/object/computed';
+import { inject as service } from '@ember/service';
+import { isPresent } from '@ember/utils';
+import { set, get, computed } from '@ember/object';
 import layout from '../../templates/components/form-fields/radio-field-simple';
 
 import { humanize } from '../../utils/strings';
-
-const {
-  Component,
-  String: { dasherize },
-  computed,
-  computed: { or },
-  get,
-  inject: { service },
-  isPresent,
-  set
-} = Ember;
 
 const RadioFieldComponent = Component.extend({
   tagName: '',

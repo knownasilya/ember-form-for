@@ -1,52 +1,54 @@
-import Ember from 'ember';
-import { moduleForComponent, test } from 'ember-qunit';
+import { run } from '@ember/runloop';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-const { run } = Ember;
+module('Integration | Component | {{fieldset-for}}', function(hooks) {
+  setupRenderingTest(hooks);
 
-moduleForComponent('fieldset-for', 'Integration | Component | {{fieldset-for}}', {
-  integration: true,
-
-  setup() {
-    this.set('object', { name: 'Peter' });
-  }
-});
-
-test('It yields an helper for rendering form components', function(assert) {
-  this.render(hbs`
-    {{#fields-for object as |f|}}
-      {{f.text-field "name"}}
-    {{/fields-for}}
-  `);
-
-  assert.equal(this.$('input[type="text"]').length, 1);
-});
-
-test('It puts the given attribute\'s value in the input', function(assert) {
-  this.render(hbs`
-    {{#fields-for object as |f|}}
-      {{f.text-field "name"}}
-    {{/fields-for}}
-  `);
-
-  let $input = this.$('input[type="text"]');
-
-  assert.equal($input.val(), 'Peter');
-});
-
-test('By default object properties are updated on typing', function(assert) {
-  this.render(hbs`
-    {{#fields-for object as |f|}}
-      {{f.text-field "name"}}
-    {{/fields-for}}
-  `);
-
-  let $input = this.$('input[type="text"]');
-
-  run(() => {
-    $input.val('Robert');
-    $input.trigger('input');
+  hooks.beforeEach(function() {
+    this.setup = function() {
+      this.set('object', { name: 'Peter' });
+    };
   });
 
-  assert.equal(this.get('object.name'), 'Robert');
+  test('It yields an helper for rendering form components', async function(assert) {
+    await render(hbs`
+      {{#fields-for object as |f|}}
+        {{f.text-field "name"}}
+      {{/fields-for}}
+    `);
+
+    assert.dom('input[type="text"]').exists({ count: 1 });
+  });
+
+  test('It puts the given attribute\'s value in the input', async function(assert) {
+    await render(hbs`
+      {{#fields-for object as |f|}}
+        {{f.text-field "name"}}
+      {{/fields-for}}
+    `);
+
+    let $input = this.$('input[type="text"]');
+
+    assert.equal($input.val(), 'Peter');
+  });
+
+  test('By default object properties are updated on typing', async function(assert) {
+    await render(hbs`
+      {{#fields-for object as |f|}}
+        {{f.text-field "name"}}
+      {{/fields-for}}
+    `);
+
+    let $input = this.$('input[type="text"]');
+
+    run(() => {
+      $input.val('Robert');
+      $input.trigger('input');
+    });
+
+    assert.equal(this.get('object.name'), 'Robert');
+  });
 });

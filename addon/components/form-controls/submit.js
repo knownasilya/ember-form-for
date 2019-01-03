@@ -1,9 +1,9 @@
-import Ember from 'ember';
-import EmberObject from '@ember/object';
+import { alias } from '@ember/object/computed';
+import PromiseProxyMixin from '@ember/object/promise-proxy-mixin';
+import RSVP from 'rsvp';
+import EmberObject, { observer, computed } from '@ember/object';
 import Button from './button';
 import layout from 'ember-form-for/templates/components/form-controls/submit';
-
-const { computed: { alias }, PromiseProxyMixin, RSVP, computed, observer } = Ember;
 
 const SubmitButton = Button.extend({
   layout,

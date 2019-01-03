@@ -1,23 +1,24 @@
+import Component from '@ember/component';
+import { dasherize } from '@ember/string';
+import { assert } from '@ember/debug';
+import { reads, or, notEmpty } from '@ember/object/computed';
+import { guidFor } from '@ember/object/internals';
+import { inject as service } from '@ember/service';
+import { isPresent, isEmpty } from '@ember/utils';
+import {
+  set,
+  observer,
+  getWithDefault,
+  get,
+  computed
+} from '@ember/object';
 import Ember from 'ember';
 import layout from '../templates/components/form-field-simple';
 
 import { humanize } from '../utils/strings';
 
 const {
-  Component,
-  String: { dasherize },
-  assert,
-  computed,
-  computed: { notEmpty, or, reads },
-  get,
-  getWithDefault,
-  guidFor,
-  inject: { service },
-  isEmpty,
-  isPresent,
-  mixin,
-  observer,
-  set
+  mixin
 } = Ember;
 
 const FormFieldComponent = Component.extend({

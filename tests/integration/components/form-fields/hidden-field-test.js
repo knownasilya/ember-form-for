@@ -1,21 +1,21 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent(
-  'form-fields/hidden-field',
-  'Integration | Component | form fields/hidden field',
-  {
-    integration: true,
+module('Integration | Component | form fields/hidden field', function(hooks) {
+  setupRenderingTest(hooks);
 
-    setup() {
+  hooks.beforeEach(function() {
+    this.setup = function() {
       this.set('object', { givenName: 'Albert' });
       this.set('propertyName', 'givenName');
-    }
-  }
-);
+    };
+  });
 
-test('It does not renders a label for a hidden field', function(assert) {
-  this.render(hbs`{{form-fields/hidden-field propertyName object=object}}`);
-  assert.equal(this.$('input[type="hidden"]').length, 1);
-  assert.equal(this.$('label').length, 0);
+  test('It does not renders a label for a hidden field', async function(assert) {
+    await render(hbs`{{form-fields/hidden-field propertyName object=object}}`);
+    assert.dom('input[type="hidden"]').exists({ count: 1 });
+    assert.dom('label').doesNotExist();
+  });
 });

@@ -1,11 +1,13 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('form-controls/reset', 'Integration | Component | {{form-controls/reset}}', {
-  integration: true
-});
+module('Integration | Component | {{form-controls/reset}}', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('It renders a reset button', function(assert) {
-  this.render(hbs`{{form-controls/reset}}`);
-  assert.equal(this.$('button').attr('type'), 'reset', 'Reset button is rendered');
+  test('It renders a reset button', async function(assert) {
+    await render(hbs`{{form-controls/reset}}`);
+    assert.dom('button').hasAttribute('type', 'reset', 'Reset button is rendered');
+  });
 });

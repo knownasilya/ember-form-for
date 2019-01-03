@@ -1,36 +1,38 @@
-import { moduleForComponent, test } from 'ember-qunit';
+import { module, test } from 'qunit';
+import { setupRenderingTest } from 'ember-qunit';
+import { render, find, findAll } from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('form-label', 'Integration | Component | {{form-label}}', {
-  integration: true
-});
+module('Integration | Component | {{form-label}}', function(hooks) {
+  setupRenderingTest(hooks);
 
-test('It renders', function(assert) {
-  this.render(hbs`{{form-label}}`);
-  assert.equal(this.$('label').length, 1);
-});
+  test('It renders', async function(assert) {
+    await render(hbs`{{form-label}}`);
+    assert.dom('label').exists({ count: 1 });
+  });
 
-test('It shows the label value', function(assert) {
-  this.render(hbs`{{form-label "Foo"}}`);
-  assert.equal(this.$('label').text().trim(), 'Foo');
-});
+  test('It shows the label value', async function(assert) {
+    await render(hbs`{{form-label "Foo"}}`);
+    assert.dom('label').hasText('Foo');
+  });
 
-test('For can be bound', function(assert) {
-  this.render(hbs`{{form-label for="abc"}}`);
-  assert.equal(this.$('label').attr('for'), 'abc');
-});
+  test('For can be bound', async function(assert) {
+    await render(hbs`{{form-label for="abc"}}`);
+    assert.dom('label').hasAttribute('for', 'abc');
+  });
 
-test('Form can be bound', function(assert) {
-  this.render(hbs`{{form-label form="form_1"}}`);
-  assert.equal(this.$('label').attr('form'), 'form_1');
-});
+  test('Form can be bound', async function(assert) {
+    await render(hbs`{{form-label form="form_1"}}`);
+    assert.dom('label').hasAttribute('form', 'form_1');
+  });
 
-test('Alternatively can yield to block', function(assert) {
-  this.render(hbs`{{#form-label}}TESTING{{/form-label}}`);
-  assert.equal(this.$('label').text().trim(), 'TESTING');
-});
+  test('Alternatively can yield to block', async function(assert) {
+    await render(hbs`{{#form-label}}TESTING{{/form-label}}`);
+    assert.dom('label').hasText('TESTING');
+  });
 
-test('Required adds a * to the label', function(assert) {
-  this.render(hbs`{{form-label "Test" required=true}}`);
-  assert.equal(this.$('label:contains(*)').length, 1);
+  test('Required adds a * to the label', async function(assert) {
+    await render(hbs`{{form-label "Test" required=true}}`);
+    assert.equal(this.$('label:contains(*)').length, 1);
+  });
 });

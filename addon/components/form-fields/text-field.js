@@ -1,10 +1,6 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { set } from '@ember/object';
 import layout from '../../templates/components/form-fields/text-field';
-
-const {
-  Component,
-  set
-} = Ember;
 
 const TextFieldComponent = Component.extend({
   tagName: '',

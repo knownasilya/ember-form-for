@@ -1,10 +1,5 @@
-import Ember from 'ember';
-
-const {
-  A: emberArray,
-  Helper: { helper },
-  isArray
-} = Ember;
+import { helper } from '@ember/component/helper';
+import { isArray, A as emberArray } from '@ember/array';
 
 export function contains([haystack, needle]) {
   if (isArray(haystack)) {

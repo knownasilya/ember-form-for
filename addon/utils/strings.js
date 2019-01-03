@@ -1,8 +1,4 @@
-import Ember from 'ember';
-
-const {
-  String: { capitalize, decamelize }
-} = Ember;
+import { decamelize, capitalize } from '@ember/string';
 
 const WORD_SEPERATORS = new RegExp('[-_\\. ]', 'g');
 
