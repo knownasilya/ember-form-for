@@ -1,4 +1,4 @@
-import { merge } from '@ember/polyfills';
+import { assign } from '@ember/polyfills';
 import { set } from '@ember/object';
 import config from '../config/environment';
 
@@ -15,7 +15,7 @@ const DEFAULT_CONFIG = {
 };
 
 export function initialize(application) {
-  let formForConfig = merge(DEFAULT_CONFIG, config['ember-form-for']);
+  let formForConfig = assign(DEFAULT_CONFIG, config['ember-form-for']);
   let configService = application.lookup('service:ember-form-for/config');
 
   Object.keys(formForConfig).forEach((key) => {

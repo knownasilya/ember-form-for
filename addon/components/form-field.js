@@ -62,8 +62,8 @@ const FormFieldComponent = Component.extend({
 
     let configClasses = get(this, 'configClasses');
     let fieldClasses = get(this, 'config.fieldClasses');
-    let classNames = this.classNames.compact();
-    let classNameBindings = this.classNameBindings.compact();
+    let classNames = this.classNames.filter((item) => !!item);
+    let classNameBindings = this.classNameBindings.filter((item) => !!item);
 
     this.classNames = classNames.concat(fieldClasses);
     this.classNameBindings = classNameBindings.slice();

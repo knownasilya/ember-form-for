@@ -22,8 +22,9 @@
   "dependencies": {
     "ember-cli-babel": "^7.1.2",
     "ember-cli-htmlbars": "^3.0.0",
-    "ember-one-way-controls": "https://github.com/marxsk/ember-one-way-controls.git",
-    "ember-runtime-enumerable-includes-polyfill": "^2.0.0"
+    "ember-one-way-controls": "marxsk/ember-one-way-controls#09427ee",
+    "ember-runtime-enumerable-includes-polyfill": "^2.0.0",
+    "ember-notify-property-change-polyfill": "~0.0.2"
   },
   "devDependencies": {
     "@ember/optional-features": "^0.6.3",

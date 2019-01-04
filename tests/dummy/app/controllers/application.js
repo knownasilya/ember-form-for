@@ -5,7 +5,13 @@ import RSVP from 'rsvp';
 import { isEmpty } from '@ember/utils';
 
 function createEmptyObject(attrs) {
-  return EmberObject.create(attrs, {
+  if (attrs) {
+    return EmberObject.create(attrs, {
+      errors: {}
+    });
+  }
+
+  return EmberObject.create({
     errors: {}
   });
 }
